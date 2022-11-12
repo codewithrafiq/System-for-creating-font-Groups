@@ -28,7 +28,7 @@
     "webfont": "^11.2.26"
   },
   "scripts": {
-    "start": "nodemon ./server/bin/www",
+    "start": "node ./server/bin/www",
     "react_start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
