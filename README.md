@@ -1,7 +1,7 @@
 # System-for-creating-font-Groups
 
 # Demo video: [Drive Link](https://drive.google.com/file/d/1Xj98-NHPbELVUuEQrMeI3fOOiER467ts/view?usp=sharing)
-# Live Hosted on AWS "https://34.237.49.38"
+<!-- # Live Hosted on AWS "https://34.237.49.38" -->
 
 ## Technologies :
 
@@ -18,8 +18,8 @@
 - Containers
   - Docker
   - Docker Compose
-- Hosted
-  - AWS EC2 Instance
+<!-- - Hosted
+  - AWS EC2 Instance -->
 
 ## Features
 
