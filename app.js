@@ -4,6 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const fileUpload = require("express-fileupload");
+const mongoose = require("mongoose");
+// const d = require("./server/schemas/*")
 
 
 const cors = require("cors");
@@ -13,11 +15,30 @@ var indexRouter = require("./server/routes/index");
 
 var app = express();
 
+app.set('views', path.join(__dirname, '/build'));
+app.use(express.static(path.resolve(__dirname, './build')));
+
+
+
+// Setup MongoDb
+/* This is a mongoose function that is connecting to the mongodb database. */
+mongoose.connect(process.env.DATABASE_URL,
+  (err) => {
+    if (err) {
+      // // console.log("db error-->", err);
+    } else {
+      // // console.log("Connected To Db");
+    }
+  }
+);
+
+
 app.use(logger("dev"));
 /* A middleware that parses the request body and populates req.body with an object keyed by the field
 name. */
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({limit: "10mb", extended: true}))
+app.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
+
 /* A middleware that parses the cookie header and populates req.cookies with an object keyed by the
 cookie names. */
 app.use(cookieParser());
@@ -32,7 +53,13 @@ app.use(
 );
 
 /* Routing the request to the respective router. */
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
